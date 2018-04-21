@@ -1,4 +1,5 @@
 import json
+import random
 
 class CompeManager:
 	def __init__(self):
@@ -20,7 +21,8 @@ class CompeManager:
 
 
 	def update(self,beforBase):
-		pass
+		for i in range(4):
+			self.base[i]=random.randint(-1,1)
 
 
 if __name__ == "__main__":

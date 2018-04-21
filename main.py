@@ -9,15 +9,18 @@ mqttData = {
 }
 
 
-def onMessage(client,userdata,msg):
-	print(msg.payload)
-	baseID = int(msg.payload)
+def onBase(baseID):
 	data = compe.onBase(baseID)
 	print(data)
 	create_connection("ws://127.0.0.1:12345").send(data)
 
+def onMessage(client,userdata,msg):
+	print(msg.payload)
+	baseID = int(msg.payload)
+	onBase(baseID)
+
 def onConnect(client,userdata,flags,responsCode):
-	client.subscribe(mqttData["topic"])
+	client.subscribe("LED-Camp/base")
 
 
 compe = CompeManager()
