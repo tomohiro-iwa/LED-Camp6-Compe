@@ -1,0 +1,37 @@
+div.base_area
+{
+	height:100px;
+	width:100px;
+	border:solid;
+	background-color:#888888;
+	position:absolute;
+	text-align: center;
+	font-size:60px;
+}
+
+#field
+{
+	height:600px;
+	width:600px;
+	position:absolute;
+	border:solid;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+}
+
+#point_box
+{
+	height:100px;
+	width:100px;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	margin:auto;
+	text-align: center;
+	font-size:80px;
+}
