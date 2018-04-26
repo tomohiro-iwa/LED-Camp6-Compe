@@ -1,3 +1,3 @@
 #! /bin/sh
-mosquitto_pub -p 1884 -t LED-Camp/base -m $1
+mosquitto_pub -p 1883 -t LED-Camp/base -m $1
 
