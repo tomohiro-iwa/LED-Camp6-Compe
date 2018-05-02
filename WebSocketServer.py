@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 
 mqttData = {
 	"ip":"127.0.0.1",
-	"port":1884,
+	"port":1883,
 	"topic":"LED-Camp/data"
 }
 

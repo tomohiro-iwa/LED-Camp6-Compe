@@ -13,8 +13,8 @@ connection.onerror = function(error)
 
 connection.onmessage = function(e)
 {
+	console.log(e);
 	var obj = JSON.parse(e.data);//refactaring
-	var obj = JSON.parse(obj);
 	console.log(obj);
 	
 	document.getElementById("point_box").innerHTML = obj.point;

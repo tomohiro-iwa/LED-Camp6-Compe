@@ -3,37 +3,54 @@ import random
 import time
 
 class CompeManager:
-	def __init__(self):
-		self.start_time = time.time()
-		self.limit_time = time.time() + 120
-		self.start_time = time.time()
-		self.point = 0
-		self.base = [0,0,0,0]
-		self.beforBase = -1
+    def __init__(self):
+        self.startTime = 0
+        self.limitTime = 0
+        self.point = 0
+        self.base = [0,0,0,0]
+        self.beforBase = -1
+        self.inGame = False
 
-	def onBase(self,baseID):
-		self.beforBase = baseID
-		self.point += self.base[baseID]
+        #Game Config
+        self.gameTime = 120
 
-		self.update(baseID)
+    def end(self):
+        self.__init__()
+        print("end")
 
-		data = json.dumps({
-			"point":self.point,
-			"start":self.start_time,
-			"limit":self.limit_time,
-			"baseID":baseID,
-			"base":self.base,
-		})
-		print(data)
+    def start(self):
+        self.inGame = True
+        self.startTime = time.time()
+        self.startTime = time.time() + self.gameTime
+        print("start")
 
-		return json.dumps(data)
+    def load(self,data):
+        #工事中
+        pass
 
+    def onBase(self,baseID):
+        self.beforBase = baseID
+        self.point += self.base[baseID]
 
-	def update(self,beforBase):
-		for i in range(4):
-			self.base[i]=random.randint(-1,1)
+        self.update(baseID)
 
+        data = self.makeData()
+        data["baseID"] = baseID
+        print(data)
+        return json.dumps(data)
 
-if __name__ == "__main__":
-	compe = CompeManager()
-	compe.onBase(1)
+    def makeData(self):
+        data = {
+            "point":self.point,
+            "start":self.startTime,
+            "limit":self.limitTime,
+            "time":time.time(),
+            "baseID":-1,
+            "base":self.base,
+        }
+        return data
+
+    def update(self,beforBase):
+        for i in range(4):
+            self.base[i]=random.randint(-1,1)
+
