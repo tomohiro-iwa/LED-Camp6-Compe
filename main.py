@@ -8,9 +8,14 @@ mqttData = {
     "topic":"LED-Camp/data"
 }
 
+def addLog(txt):
+    with open("data/log.txt","a") as f:
+        f.write(txt)
 
 def onBase(baseID):
     data = compe.onBase(baseID)
+    addLog(data)
+
     create_connection("ws://127.0.0.1:12345").send(data)
 
 def onMessage(client,userdata,msg):
@@ -18,9 +23,11 @@ def onMessage(client,userdata,msg):
         if msg.payload == b"start":
             data = compe.start()
 
-        if msg.payload == "end":
+        if msg.payload == b"end":
             data = compe.end()
         
+        addLog(data)
+
         create_connection("ws://127.0.0.1:12345").send(data)
         return
 
