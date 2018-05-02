@@ -12,43 +12,55 @@ class CompeManager:
         self.inGame = False
 
         #Game Config
-        self.gameTime = 120
+        self.gameTime = 20
 
     def end(self):
         self.__init__()
         print("end")
+        return self.makeJson(msg="end",time=now)
 
     def start(self):
         self.inGame = True
-        self.startTime = time.time()
-        self.startTime = time.time() + self.gameTime
+        now = time.time()
+        self.startTime = now
+        self.limitTime = now + self.gameTime
         print("start")
+        return self.makeJson(msg="start",time=now)
 
     def load(self,data):
         #工事中
         pass
 
     def onBase(self,baseID):
-        self.beforBase = baseID
-        self.point += self.base[baseID]
+        now = time.time()
+        data = ""
+        if self.inGame and now < self.limitTime:
+            self.beforBase = baseID
+            self.point += self.base[baseID]
 
-        self.update(baseID)
+            self.update(baseID)
+            data = self.makeJson(msg="onBase",place=baseID,time=now)
+        else:
+            data = self.makeJson(msg="time over",place=baseID,time=now)
 
-        data = self.makeData()
-        data["baseID"] = baseID
         print(data)
-        return json.dumps(data)
-
-    def makeData(self):
-        data = {
-            "point":self.point,
-            "start":self.startTime,
-            "limit":self.limitTime,
-            "time":time.time(),
-            "baseID":-1,
-            "base":self.base,
-        }
         return data
+
+    def makeJson(self,msg="",place=-1,time=-1):
+        data = {
+            "state":{
+                "point":self.point,
+                "start":self.startTime,
+                "limit":self.limitTime,
+                "base":self.base,
+            },
+            "event":{
+                "msg":msg,
+                "place":place,
+                "time":time,
+            }
+        }
+        return json.dumps(data)
 
     def update(self,beforBase):
         for i in range(4):

@@ -15,15 +15,15 @@ def onBase(baseID):
 
 def onMessage(client,userdata,msg):
     if msg.topic == "LED-Camp/message":
-        print(msg.payload)
         if msg.payload == b"start":
-            compe.start()
+            data = compe.start()
+
         if msg.payload == "end":
-            compe.end()
+            data = compe.end()
         
+        create_connection("ws://127.0.0.1:12345").send(data)
         return
 
-    print(msg.payload)
     baseID = int(msg.payload)
     onBase(baseID)
 

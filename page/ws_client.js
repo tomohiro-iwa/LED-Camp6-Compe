@@ -13,14 +13,13 @@ connection.onerror = function(error)
 
 connection.onmessage = function(e)
 {
-	console.log(e);
 	var obj = JSON.parse(e.data);//refactaring
 	console.log(obj);
 	
-	document.getElementById("point_box").innerHTML = obj.point;
+	document.getElementById("point_box").innerHTML = obj.state.point;
 	for(var i=0;i<4;i++)
 	{
-		document.getElementById("base"+i).innerHTML = obj.base[i];
+		document.getElementById("base"+i).innerHTML = obj.state.base[i];
 	}
 };
 
