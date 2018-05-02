@@ -12,7 +12,7 @@ class CompeManager:
         self.inGame = False
 
         #Game Config
-        self.gameTime = 20
+        self.gameTime = 5
 
     def end(self):
         self.__init__()

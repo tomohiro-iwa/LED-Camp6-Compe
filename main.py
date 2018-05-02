@@ -11,6 +11,7 @@ mqttData = {
 def addLog(txt):
     with open("data/log.txt","a") as f:
         f.write(txt)
+        f.write("\n")
 
 def onBase(baseID):
     data = compe.onBase(baseID)

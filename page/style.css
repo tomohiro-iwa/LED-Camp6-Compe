@@ -15,7 +15,7 @@ div.base_area
 	width:600px;
 	position:absolute;
 	border:solid;
-	top:0;
+	top:80;
 	bottom:0;
 	left:0;
 	right:0;
@@ -34,4 +34,17 @@ div.base_area
 	margin:auto;
 	text-align: center;
 	font-size:80px;
+}
+
+#time_area
+{
+	height:100px;
+	width:100px;
+	position:absolute;
+	left:0;
+	right:0;
+	z-index:2;
+	margin:auto;
+	text-align: center;
+	font-size:40px;
 }
