@@ -25,6 +25,7 @@ class CompeManager:
         now = time.time()
         self.startTime = now
         self.limitTime = now + self.gameTime
+        self.update()
         print("start")
         return self.makeJson(msg="start",time=now)
 
@@ -39,7 +40,7 @@ class CompeManager:
             self.beforBase = baseID
             self.point += self.base[baseID]
 
-            self.update(baseID)
+            self.update()
             data = self.makeJson(msg="onBase",place=baseID,time=now)
         else:
             data = self.makeJson(msg="time over",place=baseID,time=now)
@@ -63,7 +64,7 @@ class CompeManager:
         }
         return json.dumps(data)
 
-    def update(self,beforBase):
+    def update(self):
         for i in range(4):
             self.base[i]=random.randint(-1,1)
 

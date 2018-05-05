@@ -1,4 +1,7 @@
+#! /usr/bin/python3
+
 from CompeManager import CompeManager
+import json
 import paho.mqtt.client as mqtt
 
 mqttData = {
@@ -18,7 +21,7 @@ def send(message):
 
 
 def onMessage(client,userdata,msg):
-    data = "initial data"
+    data = json.dumps({"event":{"mgs":"initial data"}})
     if msg.topic == "LED-Camp/message":
         if msg.payload == b"start":
             data = compe.start()
