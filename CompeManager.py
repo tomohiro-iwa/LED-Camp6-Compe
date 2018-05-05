@@ -17,6 +17,7 @@ class CompeManager:
     def end(self):
         self.__init__()
         print("end")
+        now = time.time()
         return self.makeJson(msg="end",time=now)
 
     def start(self):
@@ -57,7 +58,7 @@ class CompeManager:
             "event":{
                 "msg":msg,
                 "place":place,
-                "time":time,
+                "time":time,#いらない？
             }
         }
         return json.dumps(data)
