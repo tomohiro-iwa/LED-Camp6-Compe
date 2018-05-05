@@ -1,5 +1,4 @@
 from CompeManager import CompeManager
-from websocket import create_connection
 import paho.mqtt.client as mqtt
 
 mqttData = {
@@ -8,32 +7,31 @@ mqttData = {
     "topic":"LED-Camp/data"
 }
 
-def addLog(txt):
-    with open("data/log.txt","a") as f:
-        f.write(txt)
-        f.write("\n")
+def send(message):
+    client = mqtt.Client(protocol=mqtt.MQTTv311)
+    client.connect(mqttData["ip"],port=mqttData["port"])
 
-def onBase(baseID):
-    data = compe.onBase(baseID)
-    addLog(data)
+    client.publish(mqttData["topic"],message)
+    client.publish("LED-Camp/points",message)
 
-    create_connection("ws://127.0.0.1:12345").send(data)
+    client.disconnect()
+
 
 def onMessage(client,userdata,msg):
+    data = "initial data"
     if msg.topic == "LED-Camp/message":
         if msg.payload == b"start":
             data = compe.start()
 
         if msg.payload == b"end":
             data = compe.end()
-        
-        addLog(data)
 
-        create_connection("ws://127.0.0.1:12345").send(data)
-        return
+    else:
+        baseID = int(msg.payload)
+        data = compe.onBase(baseID)
 
-    baseID = int(msg.payload)
-    onBase(baseID)
+    send(data)
+
 
 def onConnect(client,userdata,flags,responsCode):
     client.subscribe("LED-Camp/base")
