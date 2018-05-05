@@ -1,21 +1,36 @@
 # LED-Camp6-Compe
 ## 使いかた
+### 準備
+~~~:/etc/mosquitto/mosquitto.conf
+listener 1883
+
+listener 9090 127.0.0.1
+protocol websockets
 ~~~
-$ mosquitto　-p 1883
+/etc/mosquitto/mosquitto.confに上の3行を追加
+
+~~~
+$ sudo service mosquitto restart
 ~~~
 
+### 起動
 ~~~
 $ python3 main.py
 ~~~
 
-その後page/LED-CampMonitor.htmlをブラウザで開く  
+page/LED-CampMonitor.htmlをブラウザで開く  
 
-- port 1883
-- topic LED-Camp/base
-- value 0~3の整数  
+### 競技
 
-でパブリッシュするとベースを踏んだ事になり  
-ページに表示されている情報が更新される  
+~~~
+$ ./sh/message.sh start
+~~~
+で競技がスタートする
+
+~~~
+$ ./sh/on_base.sh [base番号0~3]
+~~~
+でベースを踏んだことになり点数が更新される
 
 ## 依存
 ### python package
