@@ -1,32 +1,53 @@
 import RPi.GPIO as GPIO
 import time
+import paho.mqtt.client as mqtt
+
+wait = 0.01
+thr = 10
+sensor_n = 4
 
 mqttData = {
     "ip":"127.0.0.1",
     "port":1883,
-    "topic":"LED-Camp/data"
+    "topic":"LED-Camp/base"
 }
 
-sensor_n = 4
+client = mqtt.Client(protocol=mqtt.MQTTv311)
+
+
 pin = [14,15,18,23]
-old = [True for i in range(sensor_n)]
+low_count = [0 for i in range(sensor_n)]
+befor = -1
 
-if __name__ == "__main__":
+def send_mqtt(base_id):
+    client.connect(mqttData["ip"],port=mqttData["port"])
+    client.publish(mqttData["topic"],str(base_id))
+
+
+def main():
     GPIO.setmode(GPIO.BCM)
-
+    
+    #GPIO setup
     for i in range(sensor_n):
         GPIO.setup(pin[i],GPIO.IN)
 
-    for _ in range(100000):
+    time.sleep(0.1)
+
+    while True:
         for i in range(sensor_n):
             value = GPIO.input(pin[i])
-            if value == False and old[i] == True:
-                #client = mqtt.Client(protocol=mqtt.MQTTv311)
-                #client.connect(mqttData["ip"],port=mqttData["port"])
-                #client.publish(mqttData["topic"],str(i))
+            if value == False:
+                low_count[i] += 1
+            else:
+                low_count[i] = 0
+
+            if low_count[i] == thr:#and befor != i:
                 print(i)
-            old[i] = value
-        time.sleep(0.1)
+                send_mqtt(i)
+
+        time.sleep(wait)
 
     GPIO.cleanup()
 
+if __name__ == "__main__":
+    main()
