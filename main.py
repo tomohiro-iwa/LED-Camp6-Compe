@@ -28,7 +28,6 @@ def onMessage(client,userdata,msg):
 
         if msg.payload == b"end":
             data = compe.end()
-
     else:
         baseID = int(msg.payload)
         data = compe.onBase(baseID)
