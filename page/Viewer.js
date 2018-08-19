@@ -10,8 +10,10 @@ var Viewer = function(dataMng){
 	this.isTimerActive = false;
 
 	/* Imageオブジェクトを生成 */
-	this.img = LED_RED;
-	this.draw();
+	this.LED_RED = LED_RED;
+	this.LED_BLUE = LED_BLUE;
+	this.LED_NONE = LED_NONE;
+	this.drawCanvas();
 };
 
 Viewer.prototype.update = function()
@@ -28,18 +30,23 @@ Viewer.prototype.update = function()
 	}
 
 	//canvasを更新
-	this.draw();
+	this.drawCanvas();
 	//
 	//
 	this.test();
 };
 
-Viewer.prototype.draw = function()
+Viewer.prototype.drawCanvas = function()
 {
-};
+	const width = 400;
+	const height = 400;
 
-Viewer.prototype.test = function()
-{
+	const led_coord = new Array(4);
+	led_coord[0] = new Victor(0,0);
+	led_coord[1] = new Victor(100,0);
+	led_coord[2] = new Victor(100,100);
+	led_coord[3] = new Victor(0,100);
+
 	this.ctx.beginPath();
 	this.ctx.moveTo(0, 0);
 	this.ctx.lineTo(400, 0);
@@ -47,9 +54,30 @@ Viewer.prototype.test = function()
 	this.ctx.lineTo(0, 400);
 	this.ctx.closePath();
 	this.ctx.stroke();
-	/* 画像を描画 */
+
 	this.ctx.scale(2,2);
-	this.ctx.drawImage(this.img, 0, 0);
+	let point = this.dataMng.getBasePoint();
+	for(let i=0;i<4;i++)
+	{
+		console.log("draw led in drawCanvas()");
+		let x = led_coord[i].x
+		let y = led_coord[i].y
+		let img = this.LED_NONE;
+		if(point[i]==1)
+			img = this.LED_BLUE;
+		if(point[i]==0)
+			img = this.LED_NONE;
+		if(point[i]==-1)
+			img = this.LED_RED;
+
+		this.ctx.drawImage(img, x, y);
+	}
+	this.ctx.scale(0.5,0.5);
+};
+
+Viewer.prototype.test = function()
+{
+	/* 画像を描画 */
 }
 
 //callbackに呼ばせる

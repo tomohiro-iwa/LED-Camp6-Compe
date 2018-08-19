@@ -49,12 +49,16 @@ class CompeManager:
         return data
 
     def makeJson(self,msg="",place=-1,time=-1):
+        baseDict = {}
+        for i in range(4):
+          baseDict[str(i)] = self.base[i]
+
         data = {
             "state":{
                 "point":self.point,
                 "start":self.startTime,
                 "limit":self.limitTime,
-                "base":self.base,
+                "base":baseDict,
             },
             "event":{
                 "msg":msg,

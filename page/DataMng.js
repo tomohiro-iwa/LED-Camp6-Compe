@@ -4,7 +4,7 @@ var DataMng = function(){
                 "point":5,
                 "start":0,
                 "limit":1000,
-                "base":[1,0,1,0],
+                "base":{"0":0,"1":0,"2":0,"3":0},
             },
             "event":{
                 "msg":"test update",
@@ -22,7 +22,7 @@ DataMng.prototype.update = function(data_dict)
 
 DataMng.prototype.getMyPoint = function()
 {
-	return 1996;
+	return this.data.state.point;
 };
 
 DataMng.prototype.getGameTime = function()
@@ -42,4 +42,14 @@ DataMng.prototype.inGameTime = function()
 	{
 		return false;
 	}
-}
+};
+
+DataMng.prototype.getBasePoint = function()
+{
+	let base = new Array(4);
+	for(let i=0;i<4;i++)
+	{
+		base[i] = this.data.state.base[""+i];
+	}
+	return base;
+};
