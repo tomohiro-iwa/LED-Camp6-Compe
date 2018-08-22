@@ -39,6 +39,7 @@ class CompeManager:
 
     def onBase(self,baseID):
         data = ""
+        now = time.time();
         if self.inGame and now < self.limitTime:
             self.beforBase = baseID
             self.point += self.base[baseID]
@@ -67,7 +68,8 @@ class CompeManager:
                 "time":now
             }
         }
-        print(msg)
+        #print(msg)
+        print(json.dumps(data))
         return json.dumps(data)
 
     def update(self):

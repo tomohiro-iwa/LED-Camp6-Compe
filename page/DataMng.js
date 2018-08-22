@@ -25,7 +25,6 @@ DataMng.prototype.update = function(data_str)
 {
 	const data_dict = JSON.parse(data_str); 
 	this.data = data_dict;
-	console.log(this.data)
 };
 
 DataMng.prototype.getMyPoint = function()
@@ -82,7 +81,6 @@ DataMng.prototype.rankUpdate = function(rank_str)
 		this.ranking[i].name = data[0];
 		this.ranking[i].point = data[1];
 	}
-	console.log(this.ranking);
 	
 };
 

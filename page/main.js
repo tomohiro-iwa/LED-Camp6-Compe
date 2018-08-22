@@ -5,7 +5,7 @@ window.onload = function(){
 	viewer = new Viewer(dataMng);
 };
 
-var client = new Paho.MQTT.Client("127.0.0.1", 9090, "clientId");
+var client = new Paho.Client("127.0.0.1", 9090, "clientId");
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 client.connect({onSuccess:onConnect});

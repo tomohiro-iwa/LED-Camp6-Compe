@@ -33,7 +33,6 @@ Viewer.prototype.update = function()
 	this.myPointDOM.innerHTML = ""+point;
 	
 	//timerの状態更新
-	console.log(this.dataMng.inGameTime());
 	if(!this.isTimerActive && this.dataMng.inGameTime())
 	{
 		this.isTimerActive = true;
@@ -70,7 +69,6 @@ Viewer.prototype.drawCanvas = function()
 	let point = this.dataMng.getBasePoint();
 	for(let i=0;i<BASE_NUM;i++)
 	{
-		console.log("draw led in drawCanvas()");
 		let x = led_coord[i].x
 		let y = led_coord[i].y
 		let img = this.LED_NONE;
