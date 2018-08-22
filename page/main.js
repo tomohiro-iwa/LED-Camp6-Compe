@@ -15,6 +15,7 @@ function onConnect()
 	console.log("onConnect");
 	client.subscribe("LED-Camp/data");
 	client.subscribe("LED-Camp/ranking");
+	client.subscribe("LED-Camp/teamname");
 };
 
 function onConnectionLost(responseObject)
@@ -37,6 +38,11 @@ function onMessageArrived(msg)
 	{
 		dataMng.rankUpdate(msg.payloadString)
 		viewer.rankUpdate();
+	}
+	if(msg.topic === "LED-Camp/teamname")
+	{
+		dataMng.teamnameUpdate(msg.payloadString)
+		viewer.teamnameUpdate();
 	}
 };	
 

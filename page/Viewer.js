@@ -15,6 +15,8 @@ var Viewer = function(dataMng){
 		};
 	}
 
+	this.teamnameDOM = document.getElementById("teamname");
+
 	this.isTimerActive = false;
 
 	/* Imageオブジェクトを生成 */
@@ -109,4 +111,10 @@ Viewer.prototype.rankUpdate = function()
 		this.rankDOM[i].name.innerHTML = ranking[i].name;
 		this.rankDOM[i].point.innerHTML = ranking[i].point;
 	}
+};
+
+
+Viewer.prototype.teamnameUpdate = function()
+{
+	this.teamnameDOM.innerHTML = this.dataMng.getTeamname();
 };

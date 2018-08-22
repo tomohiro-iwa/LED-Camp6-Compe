@@ -1,25 +1,26 @@
 var DataMng = function(){
-        this.data = {
-            "state":{
-                "point":5,
-                "start":0,
-                "limit":1000,
-                "base":{"0":0,"1":0,"2":0,"3":0},
-            },
-            "event":{
-                "msg":"test update",
-                "place":1,
-                "time":0
-            }
-        };
-				this.ranking = new Array(RANK_NUM);
-				for(let i=0;i<RANK_NUM;i++)
-				{
-					this.ranking[i]={
-						name:"",
-						point:""
-					};
-				}
+  this.data = {
+      "state":{
+          "point":0,
+          "start":0,
+          "limit":1000,
+          "base":{"0":0,"1":0,"2":0,"3":0},
+      },
+      "event":{
+          "msg":"test update",
+          "place":1,
+          "time":0
+      }
+  };
+	this.ranking = new Array(RANK_NUM);
+	for(let i=0;i<RANK_NUM;i++)
+	{
+		this.ranking[i]={
+			name:"",
+			point:""
+		};
+	}
+	this.teamname = "";
 };
 
 DataMng.prototype.update = function(data_str)
@@ -79,4 +80,13 @@ DataMng.prototype.rankUpdate = function(rank_str)
 DataMng.prototype.getRanking = function()
 {
 	return this.ranking;
+};
+DataMng.prototype.teamnameUpdate = function(name_str)
+{
+	this.teamname = name_str;
+};
+
+DataMng.prototype.getTeamname = function()
+{
+	return this.teamname;
 };
