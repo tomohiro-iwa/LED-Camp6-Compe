@@ -26,8 +26,11 @@ def onMessage(client,userdata,msg):
         if msg.payload == b"start":
             data = compe.start()
 
-        if msg.payload == b"end":
-            data = compe.end()
+        if msg.payload == b"stop":
+            data = compe.stop()
+
+        if msg.payload == b"restart":
+            data = compe.restart()
     else:
         baseID = int(msg.payload)
         data = compe.onBase(baseID)

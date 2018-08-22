@@ -1,11 +1,9 @@
 var DataMng = function(){
   this.data = {
-      "state":{
-          "point":0,
-          "start":0,
-          "limit":1000,
-          "base":{"0":0,"1":0,"2":0,"3":0},
-      },
+			"point":0,
+			"start":0,
+			"limit":1000,
+			"base":{"0":0,"1":0,"2":0,"3":0},
       "event":{
           "msg":"test update",
           "place":1,
@@ -32,26 +30,37 @@ DataMng.prototype.update = function(data_str)
 
 DataMng.prototype.getMyPoint = function()
 {
-	return this.data.state.point;
+	return this.data.point;
 };
 
 DataMng.prototype.getGameTime = function()
 {
-	const limit = this.data.state.limit;
+	const limit = this.data.limit;
+	if(this.inStop())
+	{
+		return Math.floor(this.data.stoptime*1000);
+	}
 	var gameTime_ms = Math.floor( limit*1000 - (Date.now()) );
 	return gameTime_ms;
 
 };
+
+DataMng.prototype.inStop = function()
+{
+	if(this.data.stoptime == 0)
+		return false;
+	else
+		return true;
+};
+
 DataMng.prototype.inGameTime = function()
 {
 	const gameTime = this.getGameTime();
 	if(gameTime > 0)
 	{
 		return true;
-	}else
-	{
-		return false;
 	}
+	return false;
 };
 
 DataMng.prototype.getBasePoint = function()
@@ -59,7 +68,7 @@ DataMng.prototype.getBasePoint = function()
 	let base = new Array(BASE_NUM);
 	for(let i=0;i<BASE_NUM;i++)
 	{
-		base[i] = this.data.state.base[""+i];
+		base[i] = this.data.base[""+i];
 	}
 	return base;
 };

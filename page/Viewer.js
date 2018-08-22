@@ -33,6 +33,7 @@ Viewer.prototype.update = function()
 	this.myPointDOM.innerHTML = ""+point;
 	
 	//timerの状態更新
+	console.log(this.dataMng.inGameTime());
 	if(!this.isTimerActive && this.dataMng.inGameTime())
 	{
 		this.isTimerActive = true;
