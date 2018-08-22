@@ -5,7 +5,15 @@ var Viewer = function(dataMng){
 	this.ctx = canvas.getContext("2d");
 
 	this.myPointDOM = document.getElementById("my-point");
-	this.countDOM = document.getElementById("countdown-timer")
+	this.countDOM = document.getElementById("countdown-timer");
+	this.rankDOM = new Array(RANK_NUM);
+	for(let i=0;i<RANK_NUM;i++)
+	{
+		this.rankDOM[i] = {
+			name:document.getElementById("rank"+(i+1)+"-name"),
+			point:document.getElementById("rank"+(i+1)+"-point")
+		};
+	}
 
 	this.isTimerActive = false;
 
@@ -41,7 +49,7 @@ Viewer.prototype.drawCanvas = function()
 	const width = 400;
 	const height = 400;
 
-	const led_coord = new Array(4);
+	const led_coord = new Array(BASE_NUM);
 	led_coord[0] = new Victor(0,0);
 	led_coord[1] = new Victor(100,0);
 	led_coord[2] = new Victor(100,100);
@@ -57,7 +65,7 @@ Viewer.prototype.drawCanvas = function()
 
 	this.ctx.scale(2,2);
 	let point = this.dataMng.getBasePoint();
-	for(let i=0;i<4;i++)
+	for(let i=0;i<BASE_NUM;i++)
 	{
 		console.log("draw led in drawCanvas()");
 		let x = led_coord[i].x
@@ -90,5 +98,15 @@ Viewer.prototype.timeUpdate = function()
 		this.isTimerActive = false;
 		this.countDOM.innerHTML = "00:00.00";
 		clearInterval(this.timerID);
+	}
+};
+
+Viewer.prototype.rankUpdate = function()
+{
+	const ranking = this.dataMng.getRanking();
+	for(let i=0;i<RANK_NUM;i++)
+	{
+		this.rankDOM[i].name.innerHTML = ranking[i].name;
+		this.rankDOM[i].point.innerHTML = ranking[i].point;
 	}
 };

@@ -14,6 +14,7 @@ function onConnect()
 {
 	console.log("onConnect");
 	client.subscribe("LED-Camp/data");
+	client.subscribe("LED-Camp/ranking");
 };
 
 function onConnectionLost(responseObject)
@@ -26,7 +27,16 @@ function onConnectionLost(responseObject)
 function onMessageArrived(msg)
 {
 	console.log("onMessageArrived");
-	dataMng.update( JSON.parse(msg.payloadString) );
-	viewer.update();
+	console.log(msg)
+	if(msg.topic === "LED-Camp/data")
+	{
+		dataMng.update(msg.payloadString);
+		viewer.update();
+	}
+	if(msg.topic === "LED-Camp/ranking")
+	{
+		dataMng.rankUpdate(msg.payloadString)
+		viewer.rankUpdate();
+	}
 };	
 

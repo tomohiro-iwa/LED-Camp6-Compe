@@ -12,10 +12,19 @@ var DataMng = function(){
                 "time":0
             }
         };
+				this.ranking = new Array(RANK_NUM);
+				for(let i=0;i<RANK_NUM;i++)
+				{
+					this.ranking[i]={
+						name:"",
+						point:""
+					};
+				}
 };
 
-DataMng.prototype.update = function(data_dict)
+DataMng.prototype.update = function(data_str)
 {
+	const data_dict = JSON.parse(data_str); 
 	this.data = data_dict;
 	console.log(this.data)
 };
@@ -46,10 +55,28 @@ DataMng.prototype.inGameTime = function()
 
 DataMng.prototype.getBasePoint = function()
 {
-	let base = new Array(4);
-	for(let i=0;i<4;i++)
+	let base = new Array(BASE_NUM);
+	for(let i=0;i<BASE_NUM;i++)
 	{
 		base[i] = this.data.state.base[""+i];
 	}
 	return base;
+};
+
+DataMng.prototype.rankUpdate = function(rank_str)
+{
+	lines = rank_str.split(",");
+	for(let i=0;i<RANK_NUM;i++)
+	{
+		const data = lines[i].split(" ");
+		this.ranking[i].name = data[0];
+		this.ranking[i].point = data[1];
+	}
+	console.log(this.ranking);
+	
+};
+
+DataMng.prototype.getRanking = function()
+{
+	return this.ranking;
 };

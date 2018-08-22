@@ -13,6 +13,7 @@ LED_BLUE.src =  "img/LED_BLUE.svg";
 
 </script>
 <script type="text/javascript" src="paho-mqtt.js"></script>
+<script type="text/javascript" src="define.js"></script>
 <script type="text/javascript" src="victor.js"></script>
 <script type="text/javascript" src="Util.js"></script>
 <script type="text/javascript" src="DataMng.js"></script>
@@ -31,7 +32,20 @@ LED_BLUE.src =  "img/LED_BLUE.svg";
 		<canvas id="canvas" width="400" height="400">
 		</canvas>
 	</div>
-	<div id="ranking-grid-item" class="box">3</div>
+	<div id="ranking-grid-item" class="box">
+		<div>
+			<p id="rank1-name"></p>
+			<p id="rank1-point"></p>
+		</div>
+		<div>
+			<p id="rank2-name"></p>
+			<p id="rank2-point"></p>
+		</div>
+		<div>
+			<p id="rank3-name"></p>
+			<p id="rank3-point"></p>
+		</div>
+	</div>
 	<div id="time-grid-item" class="box">
 	<div id="countdown-timer"></div>
 	</div>
