@@ -1,6 +1,6 @@
 #! /bin/sh
 pay=""
-for i in seq 1 3
+for i in (1 2 3);
 do
 	read data <ranking.txt
 	pay=${pay}${data},

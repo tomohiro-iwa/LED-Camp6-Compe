@@ -4,24 +4,15 @@ from CompeManager import CompeManager
 import json
 import paho.mqtt.client as mqtt
 
-mqttData = {
-    "ip":"127.0.0.1",
-    "port":1883,
-    "topic":"LED-Camp/data"
-}
+compe = CompeManager()
 
 def send(message):
-    client = mqtt.Client(protocol=mqtt.MQTTv311)
-    client.connect(mqttData["ip"],port=mqttData["port"])
-
-    client.publish(mqttData["topic"],message)
-    client.publish("LED-Camp/points",message)
-
-    client.disconnect()
+    mqttc.publish("LED-Camp/data",message,2)
+    infot = mqttc.publish("LED-Camp/points",message,2)
 
 
 def onMessage(client,userdata,msg):
-    data = json.dumps({"event":{"mgs":"initial data"}})
+    data = json.dumps({"event":{"msg":"initial data"}})
     if msg.topic == "LED-Camp/message":
         if msg.payload == b"start":
             data = compe.start()
@@ -37,17 +28,10 @@ def onMessage(client,userdata,msg):
 
     send(data)
 
-
-def onConnect(client,userdata,flags,responsCode):
-    client.subscribe("LED-Camp/base")
-    client.subscribe("LED-Camp/message")
-
-
-compe = CompeManager()
-if __name__ == "__main__":
-    client = mqtt.Client(protocol=mqtt.MQTTv311)
-    client.on_message = onMessage
-    client.on_connect = onConnect
-    client.connect(mqttData["ip"],port=mqttData["port"],keepalive=60)
-    client.loop_forever()
+mqttc = mqtt.Client(protocol=mqtt.MQTTv311)
+mqttc.on_message = onMessage
+mqttc.connect("127.0.0.1",1883,60)
+mqttc.subscribe("LED-Camp/base")
+mqttc.subscribe("LED-Camp/message")
+mqttc.loop_forever()
 
