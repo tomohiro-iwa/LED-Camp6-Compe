@@ -1,8 +1,7 @@
-#! /bin/sh
+#! /bin/bash
 pay=""
-for i in (1 2 3);
+while read data
 do
-	read data <ranking.txt
 	pay=${pay}${data},
-done
+done < ./ranking.txt
 mosquitto_pub -p 1883 -t "LED-Camp/ranking" -m "$pay"

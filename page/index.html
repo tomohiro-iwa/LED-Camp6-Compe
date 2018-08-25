@@ -1,6 +1,7 @@
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="css/grid.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
 <script type="text/javascript">
 var LED_NONE = new Image();
 LED_NONE.src = "img/LED_NONE.svg";
@@ -12,47 +13,72 @@ var LED_BLUE = new Image();
 LED_BLUE.src =  "img/LED_BLUE.svg";
 
 </script>
-<script type="text/javascript" src="paho-mqtt.js"></script>
-<script type="text/javascript" src="define.js"></script>
-<script type="text/javascript" src="victor.js"></script>
-<script type="text/javascript" src="Util.js"></script>
-<script type="text/javascript" src="DataMng.js"></script>
-<script type="text/javascript" src="Viewer.js"></script>
-<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="js/paho-mqtt.js"></script>
+<script type="text/javascript" src="js/define.js"></script>
+<script type="text/javascript" src="js/victor.js"></script>
+<script type="text/javascript" src="js/Util.js"></script>
+<script type="text/javascript" src="js/DataMng.js"></script>
+<script type="text/javascript" src="js/Viewer.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
 
+<div align="center">
 <div id="container">
-	<div id="team-grid-item" class="box">
-	<div id="teamname"></div>
+	<div id="team-item" class="text-box">
+		<span class="info-left">Team:</span>
+		<span id="teamname" class="info-right">teamname</span>
 	</div>
-	<div id="score-grid-item" class="box">
-	<p id="my-point"></p>
-	</div>
-		
-	<div id="base-grid-item" class="box" align="center">
-		<canvas id="canvas" width="400" height="400">
+	<div id="canvas-item">
+		<canvas id="canvas" width="600px" height="600px">
 		</canvas>
 	</div>
-	<div id="ranking-grid-item" class="box">
-		<div>
-			<p id="rank1-name"></p>
-			<p id="rank1-point"></p>
-		</div>
-		<div>
-			<p id="rank2-name"></p>
-			<p id="rank2-point"></p>
-		</div>
-		<div>
-			<p id="rank3-name"></p>
-			<p id="rank3-point"></p>
-		</div>
+<!-- 次の列 -->
+	<div id="time-item" class="text-box">
+		<span class="info-left">time:</span>
+		<span id="countdown-timer" class="info-right">00:00:00</span>
 	</div>
-	<div id="time-grid-item" class="box">
-	<div id="countdown-timer"></div>
+
+	<div id="score-item" class="text-box">
+		<span class="info-left">Score:</span>
+		<span id="my-point" class="info-right">0</span>
 	</div>
-	<div id="nextteam-grid-item" class="box">5</div>
+
+	<div id="ranking-item" class="text-box">
+		<div id="ranking-title">Ranking<div>
+		<div style="margin-top: 30px">
+		<table border="1" width="100%">
+		<tr>
+			<th width="80%">
+				<span id="rank1-name" class="ranking-name">aaa</span>
+			</th>
+			<th>
+				<span id="rank1-point">10</span>
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<span id="rank2-name" class="ranking-name">aaa</span>
+			</th>
+			<th>
+				<span id="rank2-point">10</span>
+			</th>
+		</tr>
+		<tr>
+			<th>
+				<span id="rank3-name" class="ranking-name">aaa</span>
+			</th>
+			<th>
+				<span id="rank3-point">10</span>
+			</th>
+		</tr>
+		</table>
+		</div>
+		<br>
+	</div>
 </div>
+</div>
+		
 
 </body>
 </html>

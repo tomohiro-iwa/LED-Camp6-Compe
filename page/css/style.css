@@ -1,0 +1,56 @@
+.hoge
+{
+	margin: 5px 5px 5px 5px;
+}
+.text-box
+{
+	margin: 5px 5px 5px 5px;
+	border: ridge 5px;
+	position: relative;
+}
+
+.info-left
+{
+	font-size: 32px;
+	position: absolute;
+	left: 20px;
+	bottom: 15px;
+}
+.info-right
+{
+	font-size: 32px;
+	position: absolute;
+	float: left;
+	right: 10px;
+	bottom: 15px;
+	margin-right: 20px;
+}
+
+#teamname
+{
+	font-size: 64px;
+	position: absolute;
+	float: left;
+	right: 10px;
+	bottom: 10px;
+	margin-right: 20px;
+
+}
+
+.ranking-box
+{
+	position: static;
+	height: 60px;
+}
+#ranking-title
+{
+	font-size: 54px;
+	margin-bottom: 30px;
+	height: 80px;
+}
+
+.ranking-name
+{
+	float: left;
+	font-size: 32;
+}

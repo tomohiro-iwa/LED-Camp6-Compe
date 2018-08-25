@@ -48,24 +48,23 @@ Viewer.prototype.update = function()
 
 Viewer.prototype.drawCanvas = function()
 {
-	const width = 400;
-	const height = 400;
+	const width = 600;
+	const height = 600;
 
 	const led_coord = new Array(BASE_NUM);
-	led_coord[0] = new Victor(0,0);
-	led_coord[1] = new Victor(100,0);
-	led_coord[2] = new Victor(100,100);
-	led_coord[3] = new Victor(0,100);
+	led_coord[0] = new Victor(50,50);
+	led_coord[1] = new Victor(400,50);
+	led_coord[2] = new Victor(400,400);
+	led_coord[3] = new Victor(50,400);
 
 	this.ctx.beginPath();
 	this.ctx.moveTo(0, 0);
-	this.ctx.lineTo(400, 0);
-	this.ctx.lineTo(400, 400);
-	this.ctx.lineTo(0, 400);
+	this.ctx.lineTo(600, 0);
+	this.ctx.lineTo(600, 600);
+	this.ctx.lineTo(0, 600);
 	this.ctx.closePath();
 	this.ctx.stroke();
 
-	this.ctx.scale(2,2);
 	let point = this.dataMng.getBasePoint();
 	for(let i=0;i<BASE_NUM;i++)
 	{
@@ -81,7 +80,6 @@ Viewer.prototype.drawCanvas = function()
 
 		this.ctx.drawImage(img, x, y);
 	}
-	this.ctx.scale(0.5,0.5);
 };
 
 Viewer.prototype.test = function()
