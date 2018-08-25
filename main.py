@@ -6,10 +6,6 @@ import paho.mqtt.client as mqtt
 
 compe = CompeManager()
 
-def send(message):
-    mqttc.publish("LED-Camp/data",message,2)
-    infot = mqttc.publish("LED-Camp/points",message,2)
-
 
 def onMessage(client,userdata,msg):
     data = json.dumps({"event":{"msg":"initial data"}})
@@ -25,8 +21,9 @@ def onMessage(client,userdata,msg):
     else:
         baseID = int(msg.payload)
         data = compe.onBase(baseID)
+        mqttc.publish("LED-Camp/point",compe.getData4Tank(),2)
 
-    send(data)
+    mqttc.publish("LED-Camp/data",data,2)
 
 mqttc = mqtt.Client(protocol=mqtt.MQTTv311)
 mqttc.on_message = onMessage

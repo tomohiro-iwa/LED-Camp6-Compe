@@ -49,6 +49,14 @@ class CompeManager:
 
         return data
 
+    def getData4Tank(self):
+        result = ""
+        for i in range(4):
+            result+=str(self.base[i])+","
+        result+=str(self.beforBase)
+	
+        return result
+        
 
     def makeJson(self,msg="",place=-1):
         now = time.time()
