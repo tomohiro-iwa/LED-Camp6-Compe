@@ -12,6 +12,7 @@ def onMessage(client,userdata,msg):
     if msg.topic == "LED-Camp/message":
         if msg.payload == b"start":
             data = compe.start()
+            mqttc.publish("LED-Camp/point",compe.getData4Tank(),2)
 
         if msg.payload == b"stop":
             data = compe.stop()
