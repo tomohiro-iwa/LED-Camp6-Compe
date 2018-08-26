@@ -9,7 +9,7 @@ Util.ms2str = function(time)
 	time -= s*1000;
 
 	const ms = Math.floor(time / 10);
-	return Util.fill0(m)+":"+Util.fill0(s)+"."+ms;
+	return Util.fill0(m)+":"+Util.fill0(s)+"."+Util.fill0(ms);
 }
 
 Util.fill0 = function(n)
