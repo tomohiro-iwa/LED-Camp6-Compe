@@ -5,7 +5,7 @@ window.onload = function(){
 	viewer = new Viewer(dataMng);
 };
 
-var client = new Paho.Client(BROKER_ADDR, 9090, "clientId");
+var client = new Paho.Client(BROKER_ADDR, 9090,""+Math.random());
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 client.connect({onSuccess:onConnect});
