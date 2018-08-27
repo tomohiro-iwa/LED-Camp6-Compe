@@ -6,13 +6,9 @@ wait = 0.01
 thr = 10
 sensor_n = 4
 
-mqttData = {
-    "ip":"127.0.0.1",
-    "port":1883,
-    "topic":"LED-Camp/base"
-}
-
-client = mqtt.Client(protocol=mqtt.MQTTv311)
+mqttc = mqtt.Client(protocol=mqtt.MQTTv311)
+mqttc.connect("192.168.20.52",1883,60)
+mqttc.loop_start()
 
 
 pin = [14,15,18,23]
@@ -20,8 +16,7 @@ low_count = [0 for i in range(sensor_n)]
 befor = -1
 
 def send_mqtt(base_id):
-    client.connect(mqttData["ip"],port=mqttData["port"])
-    client.publish(mqttData["topic"],str(base_id))
+    mqttc.publish("LED-Camp/data",str(base_id))
 
 
 def main():
