@@ -17,6 +17,7 @@ class CompeManager:
     def start(self):
         self.inGame = True
         self.stopTime = 0
+	self.beforBase = random.randint(0,3)
         now = time.time()
         self.limitTime = now + self.gameTime
         self.update()
@@ -82,5 +83,9 @@ class CompeManager:
 
     def update(self):
         for i in range(4):
-            self.base[i]=random.randint(-1,1)
-
+            if i == self.beforBase:
+	        self.base[i] = 0
+	    if i == (self.beforBase+2)%4:
+	    	self.base[i] = 2
+	    else:
+	        self.base[i] = 1
