@@ -17,7 +17,7 @@ class CompeManager:
     def start(self):
         self.inGame = True
         self.stopTime = 0
-	self.beforBase = random.randint(0,3)
+        self.beforBase = random.randint(0,3)
         now = time.time()
         self.limitTime = now + self.gameTime
         self.update()
@@ -55,7 +55,7 @@ class CompeManager:
         for i in range(4):
             result+=str(self.base[i])+","
         result+=str(self.beforBase)
-	
+
         return result
         
 
@@ -82,10 +82,12 @@ class CompeManager:
         return json.dumps(data)
 
     def update(self):
+        print("test")
+        print(self.beforBase)
         for i in range(4):
             if i == self.beforBase:
-	        self.base[i] = 0
-	    if i == (self.beforBase+2)%4:
-	    	self.base[i] = 2
-	    else:
-	        self.base[i] = 1
+                self.base[i] = 0
+            elif i == (self.beforBase+2)%4:
+                self.base[i] = 2
+            else:
+                self.base[i] = 1

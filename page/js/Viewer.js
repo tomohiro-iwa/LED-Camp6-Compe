@@ -58,6 +58,7 @@ Viewer.prototype.drawCanvas = function()
 	led_coord[2] = new Victor(400,400);
 	led_coord[3] = new Victor(50,400);
 
+	this.ctx.clearRect(0,0,600,600);
 	this.ctx.beginPath();
 	this.ctx.moveTo(0, 0);
 	this.ctx.lineTo(600, 0);
@@ -76,7 +77,7 @@ Viewer.prototype.drawCanvas = function()
 			img = this.LED_BLUE;
 		if(point[i]==0)
 			img = this.LED_NONE;
-		if(point[i]==-1)
+		if(point[i]==2)
 			img = this.LED_RED;
 
 		this.ctx.drawImage(img, x, y);
