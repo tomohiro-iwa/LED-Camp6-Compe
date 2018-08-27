@@ -32,6 +32,7 @@ Viewer.prototype.update = function()
 	var point = this.dataMng.getMyPoint();
 	this.myPointDOM.innerHTML = ""+point;
 	
+	console.log(this.dataMng.inGameTime());
 	//timerの状態更新
 	if(!this.isTimerActive && this.dataMng.inGameTime())
 	{

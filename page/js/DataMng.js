@@ -19,12 +19,14 @@ var DataMng = function(){
 		};
 	}
 	this.teamname = "";
+	this.gosa = 0
 };
 
 DataMng.prototype.update = function(data_str)
 {
 	const data_dict = JSON.parse(data_str); 
 	this.data = data_dict;
+	this.gosa =  this.data.event.time*1000 - Date.now();
 };
 
 DataMng.prototype.getMyPoint = function()
@@ -39,7 +41,7 @@ DataMng.prototype.getGameTime = function()
 	{
 		return Math.floor(this.data.stoptime*1000);
 	}
-	var gameTime_ms = Math.floor( limit*1000 - (Date.now()) );
+	var gameTime_ms = Math.floor( limit*1000-this.gosa - (Date.now()) );
 	return gameTime_ms;
 
 };
