@@ -17,6 +17,7 @@ class CompeManager:
     def start(self):
         self.inGame = True
         self.stopTime = 0
+        self.point = 0
         self.beforBase = random.randint(0,3)
         now = time.time()
         self.limitTime = now + self.gameTime
@@ -46,7 +47,7 @@ class CompeManager:
             self.point += self.base[baseID]
 
             self.update()
-            data = self.makeJson(msg="onBase",place=baseID)
+        data = self.makeJson(msg="onBase",place=baseID)
 
         return data
 

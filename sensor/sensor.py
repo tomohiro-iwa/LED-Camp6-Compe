@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 import RPi.GPIO as GPIO
 import time
 import paho.mqtt.client as mqtt
@@ -16,7 +17,7 @@ low_count = [0 for i in range(sensor_n)]
 befor = -1
 
 def send_mqtt(base_id):
-    mqttc.publish("LED-Camp/data",str(base_id))
+    mqttc.publish("LED-Camp/base",str(base_id))
 
 
 def main():
